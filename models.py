@@ -2,13 +2,13 @@ from peewee import *
 import datetime
 from flask_login import UserMixin
 
-DATABASE = SqliteDatabase('dogs.sqlite')
+DATABASE = SqliteDatabase('pets.sqlite')
 
 class User(UserMixin, Model):
     username=CharField(unique=True)
     email=CharField(unique=True)
     password=CharField()
-    phone=numbersd
+    phone=CharField()
 
     class Meta:
         database = DATABASE
@@ -17,12 +17,14 @@ class User(UserMixin, Model):
 
 class Pet(Model):
     #coumns
-    name = CharField()
-    owner = ForeignKeyField(User, backref='dogs')
-    type = CharField()
-    created_at = DateTimeField(default=datetime.datetime.now)
-    date_lost = DateTimeField(default=datetime.datetime.now)
-    pet_detail:CharField()
+    petName = CharField()
+    aboutPet=CharField()
+    dateLost=DateTimeField(default=datetime.datetime.now)
+    found=boolean
+    owner=ForeignKeyField(User, backref='pets')
+    photo=CharField()
+
+
 
     class Meta:
         database = DATABASE
