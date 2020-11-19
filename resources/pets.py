@@ -26,11 +26,11 @@ def create_pets():
     payload = request.get_json()
     print(type(payload), 'payload')
     pet = models.Pet.create(
-    petName=payload['name'],
+    petName=payload['petName'],
     aboutPet=payload['aboutPet'],
     dateLost=payload['dateLost'],
     found=payload['found'],
-    owner=current_username.id,
+    owner=current_user.id,
     photo=payload['photo'])
     print(pet.__dict__)
     print(dir(pet))
@@ -60,7 +60,7 @@ def delete_pet(id):
     num_of_rows_deleted = delete_query.execute()
     return jsonify(
     data={},
-    message="Woof Woof Meow Meow went {} pet with id {}".format(num_of_rows_deleted, id),
+    message="{} Woof Woof Meow Meow went home. Pet with id {}".format(num_of_rows_deleted, id),
     status={"code": 200}
     )
 

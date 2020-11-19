@@ -35,7 +35,8 @@ def register():
         created_user = models.User.create(
             username=payload['username'],
             email=payload['email'],
-            password=pw_hash
+            password=pw_hash,
+            phone=payload['phone']
         )
         created_user_dict = model_to_dict(created_user)
         print(created_user_dict)
@@ -76,13 +77,13 @@ def login():
                 status=401
             ), 401
 
-
     except models.DoesNotExist:
         return jsonify(
             data={},
             message="Email or password is incorrect",
             status=401
         ), 401
+
 
 @user.route('/logout', methods=['GET'])
 def logout():

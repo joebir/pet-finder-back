@@ -51,6 +51,7 @@ def after_request(response):
 
 
 if __name__ == '__main__':
+    models.initialize()
     app.run(debug=DEBUG, port=PORT)
 
 
