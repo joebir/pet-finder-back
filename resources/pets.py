@@ -9,22 +9,17 @@ from playhouse.shortcuts import model_to_dict
 pet = Blueprint('pets', 'pet')
 
 
-@pet.route('/', methids=['get'])
+@pet.route('/', methods=['get'])
 def get_all_pets():
     try:
         pets = [model_to_dict(pet) for pet in current_user.pets]
         print(f"here is the list of pets. {pets}")
-        return jsonify(
-        data=pets,
-        message="success"
-        status="code":201
-        ),201
+        return jsonify(data=pets, status={"code": 201, "message": "success"})
+
     except models.DoesNotExist:
         return jsonify(
-        data={},
-        message="Error getting Resources"
-        status="code":401
-        ),401
+        data={}, status={"code": 401, "message": "Error getting Resources"})
+
 
 @pet.route('/', methods=["POST"])
 def create_pets():
@@ -32,11 +27,11 @@ def create_pets():
     print(type(payload), 'payload')
     pet = models.Pet.create(
     petName=payload['name'],
-    aboutPet=payload[''],
-    dateLost=payload[''],
-    found=payload[''],
-    owner=current_user.id,
-    photo=payload[''])
+    aboutPet=payload['aboutPet'],
+    dateLost=payload['dateLost'],
+    found=payload['found'],
+    owner=current_username.id,
+    photo=payload['photo'])
     print(pet.__dict__)
     print(dir(pet))
     print(model_to_dict(pet), 'model to dict')

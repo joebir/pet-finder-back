@@ -19,13 +19,14 @@ def test_user_resource():
 def register():
     payload = request.get_json()
 
-    payload['email'] = payload['email'].lower()
     payload['username'] = payload['username'].lower()
+    payload['email'] = payload['email'].lower()
+    payload['phone'] = payload['phone']
     try:
-        models.User.get(models.User.email == payload['email'])
+        models.User.get(models.User.email== payload['email'])
         return jsonify(
             data={},
-            message=f"The Email {payload['']} already exists",
+            message=f"The Email {payload['email']} already exists",
             status=401
         ), 401
 
@@ -54,7 +55,7 @@ def login():
     payload['username'] = payload['username'].lower()
 
     try:
-        user = models.User.get(models.User.username == payload['username'])
+        user = models.User.get(models.User.email == payload['email'])
 
         user_dict = model_to_dict(user)
         password_is_good = check_password_hash(user_dict['password'], payload['password'])
@@ -65,7 +66,7 @@ def login():
 
             return jsonify(
                 data=user_dict,
-                message=f"Successfully logged in {user_dict['username']}",
+                message=f"Successfully logged in {user_dict['email']}",
                 status=200
             ), 200
         else:
