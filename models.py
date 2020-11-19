@@ -21,7 +21,7 @@ class Pet(Model):
     aboutPet=CharField()
     dateLost=DateTimeField(default=datetime.datetime.now)
     reunited=BooleanField(default=False)
-    owner=ForeignKeyField(User, backref='pets')
+    user=ForeignKeyField(User, backref='pets')
     photo=CharField()
     status=CharField()
 

@@ -29,10 +29,10 @@ def create_pets():
     petName=payload['petName'],
     aboutPet=payload['aboutPet'],
     dateLost=payload['dateLost'],
-    found=payload['found'],
-    owner=current_user.id,
-    photo=payload['photo']),
-    status=payload['status']
+    reunited=payload['reunited'],
+    user=current_user.id,
+    photo=payload['photo'],
+    status=payload['status'])
 
     print(pet.__dict__)
     print(dir(pet))
