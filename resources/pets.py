@@ -31,7 +31,9 @@ def create_pets():
     dateLost=payload['dateLost'],
     found=payload['found'],
     owner=current_user.id,
-    photo=payload['photo'])
+    photo=payload['photo']),
+    status=payload['status']
+
     print(pet.__dict__)
     print(dir(pet))
     print(model_to_dict(pet), 'model to dict')

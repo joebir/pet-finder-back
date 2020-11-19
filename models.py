@@ -20,10 +20,10 @@ class Pet(Model):
     petName = CharField()
     aboutPet=CharField()
     dateLost=DateTimeField(default=datetime.datetime.now)
-    found=BooleanField(default=True)
+    reunited=BooleanField(default=False)
     owner=ForeignKeyField(User, backref='pets')
     photo=CharField()
-
+    status=CharField()
 
 
     class Meta:
