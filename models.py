@@ -24,7 +24,7 @@ class Pet(Model):
     user=ForeignKeyField(User, backref='pets')
     photo=CharField()
     status=CharField()
-
+    zipCode=CharField()
 
     class Meta:
         database = DATABASE
