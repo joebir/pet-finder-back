@@ -9,6 +9,21 @@ from playhouse.shortcuts import model_to_dict
 pet = Blueprint('pets', 'pet')
 
 
+
+
+@pet.route('/all', methods=['get'])
+def get_all_the_pets():
+    try:
+        allPets = [model_to_dict(pet) for pet in models.Pet]
+        print(f"here is the list of pets. {allPets}")
+        return jsonify(data=allPets, status={"code": 201, "message": "success"})
+
+    except models.DoesNotExist:
+        return jsonify(
+        data={}, status={"code": 401, "message": "Error getting Resources"})
+
+
+
 @pet.route('/', methods=['get'])
 def get_all_pets():
     try:
@@ -32,7 +47,8 @@ def create_pets():
     reunited=payload['reunited'],
     user=current_user.id,
     photo=payload['photo'],
-    status=payload['status'])
+    status=payload['status'],
+    zipCode=payload['zipCode'])
 
     print(pet.__dict__)
     print(dir(pet))
