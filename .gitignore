@@ -1,4 +1,4 @@
 .git
 /pets
 .env
-/__pycache__
+/resources/__pycache__
