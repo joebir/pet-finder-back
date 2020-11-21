@@ -84,6 +84,12 @@ for my_im in my_pet_list:
     my_im['my_image_name']=my_image
     new_animal_dict.append(pd.DataFrame.from_dict(my_im)) #I can save straight to database instead
 
+# delete the file using python
+    if os.path.exists(my_image):
+        os.remove(my_image)
+#    else: 
+#         print("The file does not exist")
+
 final_df=pd.concat(new_animal_dict)
 final_df.to_csv('my_sample_db.csv', index=False)
 #final_df.to_sql('sample_table', engine=engine)
@@ -91,9 +97,3 @@ final_df.to_csv('my_sample_db.csv', index=False)
 # to db:
 final_df.to_sql('my_new_table',
 con=engine, if_exists='append', index=False)
-
-# delete the file using python
-if os.path.exists(my_image):
-    os.remove(my_image)
- else: 
-    print("The file does not exist")
