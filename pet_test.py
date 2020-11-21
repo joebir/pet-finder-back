@@ -1,6 +1,21 @@
+import requests
+import base64
+import pandas as pd
+from sqlalchemy import create_engine
+import os
+# Create engine to connect to local sqlite3
+engine = create_engine('sqlite:///save_output.db', echo=True)
+con = engine.connect()
+#
+#
+#
+
+
+
+
+#Create a list of pets....
 
 my_pet_list=[
-
 
 {
     "petName": ["Lucy"],
@@ -45,3 +60,40 @@ my_pet_list=[
     "zipCode":["30066"]
 }
 ]
+
+
+new_animal_dict=[] #Create empty list... my loops saves to this list with str image columns
+n=0
+for my_im in my_pet_list:
+    n=n+1
+    #my_im['photo'][0]
+
+    #Scrape image from internet and save locally
+    response = requests.get(my_im['photo'][0])# scrpe
+
+
+    my_image='my_sample_image_{}.png'.format(n)#save file locally
+    file = open(my_image, 'wb')
+    file.write(response.content)
+
+    #Now for each saved picture read in the image and convert to string
+    with open(my_image, 'rb') as imageFile:
+        str = base64.b64encode(imageFile.read()).decode("utf-8")
+        #Now create new column to dictionary
+    my_im['my_image_string']=str
+    my_im['my_image_name']=my_image
+    new_animal_dict.append(pd.DataFrame.from_dict(my_im)) #I can save straight to database instead
+
+final_df=pd.concat(new_animal_dict)
+final_df.to_csv('my_sample_db.csv', index=False)
+#final_df.to_sql('sample_table', engine=engine)
+
+# to db:
+final_df.to_sql('my_new_table',
+con=engine, if_exists='append', index=False)
+
+# delete the file using python
+if os.path.exists(my_image):
+    os.remove(my_image)
+ else: 
+    print("The file does not exist")

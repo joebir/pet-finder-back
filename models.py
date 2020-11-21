@@ -16,15 +16,14 @@ class User(UserMixin, Model):
 
 
 class Pet(Model):
-    #coumns
     petName = CharField()
     aboutPet=CharField()
     dateLost=DateTimeField(default=datetime.datetime.now)
-    found=boolean
-    owner=ForeignKeyField(User, backref='pets')
+    reunited=BooleanField(default=False)
+    user=ForeignKeyField(User, backref='pets')
     photo=CharField()
-
-
+    status=CharField()
+    zipCode=CharField()
 
     class Meta:
         database = DATABASE
