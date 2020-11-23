@@ -25,6 +25,7 @@ def get_all_the_pets():
 
 
 @pet.route('/', methods=['GET'])
+@login_required
 def get_all_pets():
     try:
         pets = [model_to_dict(pet) for pet in current_user.pets]
@@ -39,24 +40,25 @@ def get_all_pets():
 @pet.route('/', methods=["POST"])
 @login_required
 def create_pets():
-    payload = request.get_json()
-    print(type(payload), 'payload')
-    pet = models.Pet.create(
-    petName=payload['petName'],
-    aboutPet=payload['aboutPet'],
-    dateLost=payload['dateLost'],
-    reunited=payload['reunited'],
-    user=current_user.id,
-    photo=payload['photo'],
-    status=payload['status'],
-    zipCode=payload['zipCode'])
+    try:
+        payload = request.get_json()
+        print(type(payload), 'payload')
+        createdPet = models.Pet.create(
+        petName=payload['petName'],
+        aboutPet=payload['aboutPet'],
+        dateLost=payload['dateLost'],
+        user=current_user.id,
+        photo=payload['photo'],
+        status=payload['status'],
+        zipCode=payload['zipCode'])
 
-    print(pet.__dict__)
-    print(dir(pet))
-    print(model_to_dict(pet), 'model to dict')
-    pet_dict = model_to_dict(pet)
-    return jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
-
+        # print(pet.__dict__)
+        # print(dir(pet))
+        print(model_to_dict(createdPet), 'model to dict')
+        pet_dict = model_to_dict(createdPet)
+        return jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
+    except:
+        return jsonify(status={"code": 400, "message": "Not Successful"})
 
 @pet.route('/<id>', methods=["GET"])
 def get_one_pet(id):

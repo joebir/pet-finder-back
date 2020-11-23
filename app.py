@@ -37,8 +37,8 @@ def load_user(user_id):
         return None
 
 
-CORS(pet, origins=['http://localhost:3000'], supports_credentals=True)
-CORS(user, origins=['http://localhost:3000'], supports_credentals=True)
+CORS(pet, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 
 
 app.register_blueprint(pet, url_prefix='/api/v1/pets')
@@ -51,8 +51,8 @@ mail = Mail(app)
 @app.route("/send")
 def index():
     msg = Message("Found your Pet!!",  sender = "thatguyfromcodingcamp@gmail.com",
-        recipients=['joemalatesta@msn.com'])
-    msg.body = "WOOT WOOT!!! With Help from Paresh, We got an email API working!!!  THIS WAS SENT FROM THE APP!!!!!!  Come to our sight and find out where your pet is!!"
+        recipients=[{pet.user.email}])
+    msg.body = "Come to our sight and find out where your pet is!!"
     mail.send(msg)
     return jsonify(data={}, status={"code": 201, "message": "success"})
 
