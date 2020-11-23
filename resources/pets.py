@@ -25,6 +25,7 @@ def get_all_the_pets():
 
 
 @pet.route('/', methods=['GET'])
+@login_required
 def get_all_pets():
     try:
         pets = [model_to_dict(pet) for pet in current_user.pets]
