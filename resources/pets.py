@@ -37,6 +37,7 @@ def get_all_pets():
 
 
 @pet.route('/', methods=["POST"])
+@login_required
 def create_pets():
     payload = request.get_json()
     print(type(payload), 'payload')
