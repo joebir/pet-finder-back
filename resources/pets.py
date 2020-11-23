@@ -60,7 +60,7 @@ def create_pets():
 
 @pet.route('/<id>', methods=["GET"])
 def get_one_pet(id):
-    dog = models.pet.get_by_id(id)
+    pet = models.pet.get_by_id(id)
     return jsonify(data=model_to_dict(pet), status={"code": 200, "message": "Success"})
 
 
@@ -69,7 +69,7 @@ def update_pet(id):
     payload = request.get_json()
     query = models.Pet.update(**payload).where(models.Pet.id==id)
     query.execute()
-    dog = model_to_dict(models.Pet.get_by_id(id))
+    pet = model_to_dict(models.Pet.get_by_id(id))
     return jsonify(data=pet, status={"code": 200, "message": "Success"})
 
 
