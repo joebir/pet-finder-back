@@ -37,8 +37,8 @@ def load_user(user_id):
         return None
 
 
-CORS(pet, origins=['http://localhost:3000'], supports_credentals=True)
-CORS(user, origins=['http://localhost:3000'], supports_credentals=True)
+CORS(pet, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 
 
 app.register_blueprint(pet, url_prefix='/api/v1/pets')
