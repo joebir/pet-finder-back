@@ -2,7 +2,7 @@ import models
 
 
 from flask import Blueprint, jsonify, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 from playhouse.shortcuts import model_to_dict
 
 
@@ -11,7 +11,7 @@ pet = Blueprint('pets', 'pet')
 
 
 
-@pet.route('/all', methods=['get'])
+@pet.route('/all', methods=['GET'])
 def get_all_the_pets():
     try:
         allPets = [model_to_dict(pet) for pet in models.Pet]
@@ -24,7 +24,7 @@ def get_all_the_pets():
 
 
 
-@pet.route('/', methods=['get'])
+@pet.route('/', methods=['GET'])
 def get_all_pets():
     try:
         pets = [model_to_dict(pet) for pet in current_user.pets]
@@ -37,6 +37,7 @@ def get_all_pets():
 
 
 @pet.route('/', methods=["POST"])
+@login_required
 def create_pets():
     payload = request.get_json()
     print(type(payload), 'payload')
@@ -59,7 +60,7 @@ def create_pets():
 
 @pet.route('/<id>', methods=["GET"])
 def get_one_pet(id):
-    dog = models.pet.get_by_id(id)
+    pet = models.pet.get_by_id(id)
     return jsonify(data=model_to_dict(pet), status={"code": 200, "message": "Success"})
 
 
@@ -68,7 +69,7 @@ def update_pet(id):
     payload = request.get_json()
     query = models.Pet.update(**payload).where(models.Pet.id==id)
     query.execute()
-    dog = model_to_dict(models.Pet.get_by_id(id))
+    pet = model_to_dict(models.Pet.get_by_id(id))
     return jsonify(data=pet, status={"code": 200, "message": "Success"})
 
 

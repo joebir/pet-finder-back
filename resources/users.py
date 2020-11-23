@@ -53,7 +53,7 @@ def register():
 def login():
     payload = request.get_json()
     payload['email'] = payload['email'].lower()
-    payload['username'] = payload['username'].lower()
+    # payload['username'] = payload['username'].lower()
 
     try:
         user = models.User.get(models.User.email == payload['email'])
