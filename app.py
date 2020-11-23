@@ -37,7 +37,7 @@ def load_user(user_id):
         return None
 
 
-CORS(pet, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(pet, origins=['http://localhost:3000'], ['https://git.heroku.com/pet-finder-front.git'], supports_credentials=True)
 CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 
 
