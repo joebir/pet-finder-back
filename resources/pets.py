@@ -36,7 +36,6 @@ def get_all_pets():
 @pet.route('/', methods=["POST"])
 
 def create_pets():
-    session['anonymous_user_id'] = current_user.id
     print(current_user)
     print(current_user.id)
     try:
