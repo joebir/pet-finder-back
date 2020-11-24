@@ -4,6 +4,8 @@ from flask_mail import Mail, Message
 from resources.pets import pet
 from resources.users import user
 from flask_login import LoginManager
+from flask_login import current_user, login_required
+from playhouse.shortcuts import model_to_dict
 import os
 
 import models
