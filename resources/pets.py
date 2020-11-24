@@ -13,7 +13,7 @@ pet = Blueprint('pets', 'pet')
 def get_all_the_pets():
     try:
         allPets = [model_to_dict(pet) for pet in models.Pet]
-        print(f"here is the list of pets. {allPets}")
+        # print(f"here is the list of pets. {allPets}")
         return jsonify(data=allPets, status={"code": 201, "message": "success"})
 
     except models.DoesNotExist:
@@ -34,7 +34,7 @@ def get_all_pets():
 
 
 @pet.route('/', methods=["POST"])
-@login_required
+
 def create_pets():
     try:
         payload = request.get_json()
