@@ -38,6 +38,7 @@ def get_all_pets():
 def create_pets():
     try:
         payload = request.get_json()
+        print(payload)
         createdPet = models.Pet.create(
         petName=payload['petName'],
         aboutPet=payload['aboutPet'],
