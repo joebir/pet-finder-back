@@ -39,6 +39,8 @@ def create_pets():
     try:
         payload = request.get_json()
         print(payload)
+        print(payload['photo'])
+        print(type(payload['photo']))
         createdPet = models.Pet.create(
         petName=payload['petName'],
         aboutPet=payload['aboutPet'],
