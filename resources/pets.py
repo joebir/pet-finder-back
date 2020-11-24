@@ -49,7 +49,14 @@ def create_pets():
         zipCode=payload['zipCode'])
 
         pet_dict = model_to_dict(createdPet)
-        return jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
+        print("Printing createdPet")
+        print(createdPet)
+        print("Printing pet_dict")
+        print(pet_dict)
+        to_return = jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
+        print("Printing 201 response")
+        print(to_return)
+        return to_return
     except:
         return jsonify(status={"code": 400, "message": "Not Successful"})
 
