@@ -45,7 +45,7 @@ def create_pets():
         petName='Timofey',
         aboutPet='The boy.',
         dateLost='November 23rd',
-        user=1,
+        user=current_user.id,
         photo='https://i.imgur.com/bJfRyEI.jpg',
         status='Found',
         zipCode='30309')
