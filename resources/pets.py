@@ -25,7 +25,7 @@ def get_all_the_pets():
 def get_all_pets():
     try:
         pets = [model_to_dict(pet) for pet in current_user.pets]
-        print(f"here is the list of pets. {pets}")
+        print(f"here is the list of pets. {pet}")
         return jsonify(data=pets, status={"code": 201, "message": "success"})
 
     except models.DoesNotExist:
