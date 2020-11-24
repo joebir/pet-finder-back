@@ -18,6 +18,7 @@ This repo is dedicated to the backend of 'Pet Finder' App!
 
 * Python
 * Flask
+* Pee Wee ORM
 
 ## Authors
 
