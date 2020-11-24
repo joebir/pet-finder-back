@@ -38,7 +38,6 @@ def get_all_pets():
 
 
 @pet.route('/', methods=["POST"])
-@login_required
 def create_pets():
     try:
         payload = request.get_json()
@@ -78,7 +77,6 @@ def update_pet(id):
 
 
 @pet.route('/<id>', methods=["DELETE"])
-@login_required
 def delete_pet(id):
     delete_query = models.Pet.delete().where(models.Pet.id == id)
     num_of_rows_deleted = delete_query.execute()
