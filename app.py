@@ -4,6 +4,7 @@ from flask_mail import Mail, Message
 from resources.pets import pet
 from resources.users import user
 from flask_login import LoginManager
+import os
 
 import models
 
@@ -67,6 +68,10 @@ def before_request():
 def after_request(response):
     g.db.close()
     return response
+
+if 'ON_HEROKU' in os.environ:
+    print('/non heroku!')
+    models.initialize()
 
 
 if __name__ == '__main__':

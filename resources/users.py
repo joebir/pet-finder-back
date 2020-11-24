@@ -86,6 +86,7 @@ def login():
 
 
 @user.route('/logout', methods=['GET'])
+
 def logout():
     logout_user()
     return jsonify(
