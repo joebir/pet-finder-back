@@ -38,8 +38,8 @@ def load_user(user_id):
         return None
 
 
-CORS(pet, origins=['http://localhost:3000', 'https://pet-finder-front.herokuapp.com'], supports_credentials=True)
-CORS(user, origins=['http://localhost:3000', 'https://pet-finder-front.herokuapp.com'], supports_credentials=True)
+CORS(pet, origins=['http://localhost:3000', 'https://pet-finder-front.herokuapp.com/'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000', 'https://pet-finder-front.herokuapp.com/'], supports_credentials=True)
 
 
 app.register_blueprint(pet, url_prefix='/api/v1/pets')
