@@ -46,7 +46,7 @@ def create_pets():
         aboutPet=payload['aboutPet'],
         dateLost=payload['dateLost'],
         user=current_user.id,
-        photo=payload['photo'],
+        photo='https://i.imgur.com/bJfRyEI.jpg',
         status=payload['status'],
         zipCode=payload['zipCode'])
 
