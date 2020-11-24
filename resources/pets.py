@@ -44,7 +44,7 @@ def create_pets():
         createdPet = models.Pet.create(
         petName='Timofey',
         aboutPet='The boy.',
-        dateLost='November 23rd',
+        dateLost=payload['dateLost'],
         user=1,
         photo='https://i.imgur.com/bJfRyEI.jpg',
         status='Found',
