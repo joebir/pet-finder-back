@@ -9,8 +9,6 @@ from playhouse.shortcuts import model_to_dict
 pet = Blueprint('pets', 'pet')
 
 
-
-
 @pet.route('/all', methods=['GET'])
 def get_all_the_pets():
     try:
@@ -23,9 +21,7 @@ def get_all_the_pets():
         data={}, status={"code": 401, "message": "Error getting Resources"})
 
 
-
 @pet.route('/', methods=['GET'])
-@login_required
 def get_all_pets():
     try:
         pets = [model_to_dict(pet) for pet in current_user.pets]
@@ -42,7 +38,6 @@ def get_all_pets():
 def create_pets():
     try:
         payload = request.get_json()
-        print(type(payload), 'payload')
         createdPet = models.Pet.create(
         petName=payload['petName'],
         aboutPet=payload['aboutPet'],
@@ -52,13 +47,11 @@ def create_pets():
         status=payload['status'],
         zipCode=payload['zipCode'])
 
-        # print(pet.__dict__)
-        # print(dir(pet))
-        print(model_to_dict(createdPet), 'model to dict')
         pet_dict = model_to_dict(createdPet)
         return jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
     except:
         return jsonify(status={"code": 400, "message": "Not Successful"})
+
 
 @pet.route('/<id>', methods=["GET"])
 def get_one_pet(id):

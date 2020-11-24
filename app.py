@@ -31,7 +31,6 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     try:
-        print(f"Loading")
         user = models.User.get_by_id(user_id)
         return user
     except models.DoesNotExist:
@@ -49,11 +48,11 @@ app.register_blueprint(user, url_prefix='/api/v1/users')
 mail = Mail(app)
 
 
-@app.route("/send")
+@app.route("pet/id/send")
 def index():
     msg = Message("Found your Pet!!",  sender = "thatguyfromcodingcamp@gmail.com",
         recipients=[{pet.user.email}])
-    msg.body = "Come to our sight and find out where your pet is!!"
+    msg.body = f"{current_user} Found your pet. Come to our sight and find out where your pet is!! "
     mail.send(msg)
     return jsonify(data={}, status={"code": 201, "message": "success"})
 
