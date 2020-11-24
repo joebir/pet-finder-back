@@ -42,13 +42,13 @@ def create_pets():
         print(payload['photo'])
         print(type(payload['photo']))
         createdPet = models.Pet.create(
-        petName=payload['petName'],
-        aboutPet=payload['aboutPet'],
-        dateLost=payload['dateLost'],
+        petName='Timofey',
+        aboutPet='The boy.',
+        dateLost='November 23rd',
         user=current_user.id,
         photo='https://i.imgur.com/bJfRyEI.jpg',
-        status=payload['status'],
-        zipCode=payload['zipCode'])
+        status='Found',
+        zipCode='30309')
 
         pet_dict = model_to_dict(createdPet)
         print("Printing createdPet")
