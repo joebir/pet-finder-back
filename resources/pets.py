@@ -1,7 +1,7 @@
 import models
 
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from flask_login import current_user, login_required
 from playhouse.shortcuts import model_to_dict
 
@@ -36,6 +36,8 @@ def get_all_pets():
 @pet.route('/', methods=["POST"])
 
 def create_pets():
+    if session.new:
+        session['anonymous_user_id'] = current_user.id
     try:
         payload = request.get_json()
         print(payload)
