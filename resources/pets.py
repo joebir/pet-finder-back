@@ -61,7 +61,7 @@ def create_pets():
 
 @pet.route('/<id>', methods=["GET"])
 def get_one_pet(id):
-    pet = models.pet.get_by_id(id)
+    pet = models.Pet.get_by_id(id)
     return jsonify(data=model_to_dict(pet), status={"code": 200, "message": "Success"})
 
 
