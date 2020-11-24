@@ -36,8 +36,9 @@ def get_all_pets():
 @pet.route('/', methods=["POST"])
 
 def create_pets():
-    if session.new:
-        session['anonymous_user_id'] = current_user.id
+    session['anonymous_user_id'] = current_user.id
+    print(current_user)
+    print(current_user.id)
     try:
         payload = request.get_json()
         print(payload)
