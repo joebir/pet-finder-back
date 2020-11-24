@@ -59,7 +59,8 @@ def create_pets():
         print("Printing 201 response")
         print(to_return)
         return to_return
-    except:
+    except Exception as e:
+        print(e)
         return jsonify(status={"code": 400, "message": "Not Successful"})
 
 
