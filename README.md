@@ -4,6 +4,7 @@ This repo is dedicated to the backend of 'Pet Finder' App!
 
 ## Frontend Repo
 
+More in-depth project discussion in the frontend repo.
 * https://github.com/joebir/pet-finder-front
 
 ## Deployment
