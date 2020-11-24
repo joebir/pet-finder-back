@@ -36,8 +36,6 @@ def get_all_pets():
 @pet.route('/', methods=["POST"])
 
 def create_pets():
-    print(current_user)
-    print(current_user.id)
     try:
         payload = request.get_json()
         print(payload)
@@ -47,7 +45,7 @@ def create_pets():
         petName='Timofey',
         aboutPet='The boy.',
         dateLost='November 23rd',
-        user=current_user.id,
+        user=1,
         photo='https://i.imgur.com/bJfRyEI.jpg',
         status='Found',
         zipCode='30309')
