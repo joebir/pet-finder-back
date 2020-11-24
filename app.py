@@ -48,7 +48,7 @@ app.register_blueprint(user, url_prefix='/api/v1/users')
 mail = Mail(app)
 
 
-@app.route("pet/id/send")
+@app.route("/pet/id/send")
 def index():
     msg = Message("Found your Pet!!",  sender = "thatguyfromcodingcamp@gmail.com",
         recipients=[{pet.user.email}])
