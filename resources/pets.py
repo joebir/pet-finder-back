@@ -60,14 +60,12 @@ def create_pets():
         return jsonify(status={"code": 400, "message": "Not Successful"})
 
 @pet.route('/<id>', methods=["GET"])
-@login_required
 def get_one_pet(id):
     pet = models.pet.get_by_id(id)
     return jsonify(data=model_to_dict(pet), status={"code": 200, "message": "Success"})
 
 
 @pet.route('/<id>', methods=["PUT"])
-@login_required
 def update_pet(id):
     payload = request.get_json()
     query = models.Pet.update(**payload).where(models.Pet.id==id)
