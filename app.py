@@ -50,13 +50,13 @@ app.register_blueprint(user, url_prefix='/api/v1/users')
 mail = Mail(app)
 
 
-@app.route("/send/<id>")
-def index():
-    msg = Message("Found your Pet!!",  sender = "thatguyfromcodingcamp@gmail.com",
-        recipients=[{pet.user.email}])
-    msg.body = "Come to our sight and find out where your pet is!!"
-    mail.send(msg)
-    return jsonify(data={}, status={"code": 201, "message": "success"})
+# @app.route("/send/<id>")
+# def index():
+#     msg = Message("Found your Pet!!",  sender = "thatguyfromcodingcamp@gmail.com",
+#         recipients=[{pet.user.email}])
+#     msg.body = "Come to our sight and find out where your pet is!!"
+#     mail.send(msg)
+#     return jsonify(data={}, status={"code": 201, "message": "success"})
 
 
 @app.before_request
