@@ -41,7 +41,7 @@ def load_user(user_id):
 
 CORS(pet, origins=['http://localhost:3000', 'https://pet-finder-front.herokuapp.com'], supports_credentials=True)
 CORS(user, origins=['http://localhost:3000', 'https://pet-finder-front.herokuapp.com'], supports_credentials=True)
-
+# CORS(app)
 
 app.register_blueprint(pet, url_prefix='/api/v1/pets')
 app.register_blueprint(user, url_prefix='/api/v1/users')

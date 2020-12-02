@@ -10,6 +10,7 @@ pet = Blueprint('pets', 'pet')
 
 
 @pet.route('/all', methods=['GET'])
+# @login_required
 def get_all_the_pets():
     try:
         allPets = [model_to_dict(pet) for pet in models.Pet]
@@ -22,6 +23,7 @@ def get_all_the_pets():
 
 
 @pet.route('/', methods=['GET'])
+@login_required
 def get_all_pets():
     try:
         pets = [model_to_dict(pet) for pet in current_user.pets]
@@ -34,43 +36,52 @@ def get_all_pets():
 
 
 @pet.route('/', methods=["POST"])
-
+@login_required
 def create_pets():
-    try:
+    # try:
         payload = request.get_json()
-        print(payload)
-        print(payload['photo'])
-        print(type(payload['photo']))
-        createdPet = models.Pet.create(
-        petName='Timofey',
-        aboutPet='The boy.',
-        dateLost=payload['dateLost'],
-        user=1,
-        photo='https://i.imgur.com/bJfRyEI.jpg',
-        status='Found',
-        zipCode='30309')
-
-        pet_dict = model_to_dict(createdPet)
-        print("Printing createdPet")
-        print(createdPet)
-        print("Printing pet_dict")
-        print(pet_dict)
-        to_return = jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
-        print("Printing 201 response")
-        print(to_return)
-        return to_return
-    except Exception as e:
-        print(e)
-        return jsonify(status={"code": 400, "message": "Not Successful"})
-
+        print(type(payload), 'payload')
+        pet = models.Pet.create(petName=payload['petName'], aboutPet=payload['aboutPet'],
+        dateLost=payload['dateLost'], user=current_user.id, photo=payload['photo'],
+        status=payload['status'], zipCode=payload['zipCode'])
+        # print(payload['photo'])
+        # print(type(payload['photo']))
+        # createdPet = models.Pet.create(
+        # petName='Timofey',
+        # aboutPet='The boy.',
+        # dateLost=payload['dateLost'],
+        # user=1,
+        # photo='https://i.imgur.com/bJfRyEI.jpg',
+        # status='Found',
+        # zipCode='30309')
+        print(pet.__dict__)
+        print(dir(pet))
+    #
+    #     pet_dict = model_to_dict(createdPet)
+    #     print("Printing createdPet")
+    #     print(createdPet)
+    #     print("Printing pet_dict")
+    #     print(pet_dict)
+    #     to_return = jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
+    #     print("Printing 201 response")
+    #     print(to_return)
+    #     return to_return
+    # except Exception as e:
+    #     print(e)
+    #     return jsonify(status={"code": 400, "message": "Not Successful"})
+        print(model_to_dict(pet), 'model to dict')
+        pet_dict = model_to_dict(pet)
+        return jsonify(data=pet_dict, status={"code": 201, "message": "Success"})
 
 @pet.route('/<id>', methods=["GET"])
+@login_required
 def get_one_pet(id):
     pet = models.Pet.get_by_id(id)
     return jsonify(data=model_to_dict(pet), status={"code": 200, "message": "Success"})
 
 
 @pet.route('/<id>', methods=["PUT"])
+@login_required
 def update_pet(id):
     payload = request.get_json()
     query = models.Pet.update(**payload).where(models.Pet.id==id)
@@ -80,6 +91,7 @@ def update_pet(id):
 
 
 @pet.route('/<id>', methods=["DELETE"])
+@login_required
 def delete_pet(id):
     delete_query = models.Pet.delete().where(models.Pet.id == id)
     num_of_rows_deleted = delete_query.execute()
