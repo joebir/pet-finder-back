@@ -16,8 +16,10 @@ PORT = 8000
 
 app = Flask(__name__)
 app.secret_key = "Dust Bunnies Snuggle best with Dirty Dogs"
-
-
+app.config.update(
+  SESSION_COOKIE_SECURE=True,
+  SESSION_COOKIE_SAMESITE='None'
+)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'thatguyfromcodingcamp@gmail.com'
